@@ -1,8 +1,8 @@
 import string
-import httplib, sys
+import httplib2, sys
 import myparser
 import re
-import time
+import timegit
 
 class search_google:
 	def __init__(self,word,limit,start,filetype):
@@ -18,7 +18,7 @@ class search_google:
 		self.counter=start
 		
 	def do_search_files(self):
-		h = httplib.HTTP(self.server)
+		h = httplib2.HTTP(self.server)
 		h.putrequest('GET', "/search?num="+self.quantity+"&start=" + str(self.counter) + "&hl=en&meta=&q=filetype:"+self.filetype+"%20site:" + self.word)
 		h.putheader('Host', self.hostname)
 		h.putheader('User-agent', self.userAgent)	
@@ -44,5 +44,5 @@ class search_google:
 			self.do_search_files()
 			time.sleep(1)
 			self.counter+=100
-			print "\tSearching "+ str(self.counter) + " results..."
+			print ("\tSearching "+ str(self.counter) + " results...")
 
